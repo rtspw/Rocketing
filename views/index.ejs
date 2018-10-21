@@ -1,0 +1,50 @@
+<% include ./partials/header %>
+
+<body>
+  <% include ./partials/navbar %>
+
+  <div class="top-picture position-relative overflow-hidden p-3 p-md-5 text-center bg-light" 
+  style="background-image:url('img/backgrounds/rocket-launch-bg.jpg');
+  background-size: cover;
+  background-position: center 80%;">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <h1 class="display-4 font-weight-normal text-light" style="text-shadow: 2px 2px 20px black;">Recent Launches</h1>
+      <p class="lead font-weight-normal text-light" style="text-shadow: 2px 2px 20px black;">What are the most recent lanuches in the last month?</p>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <% if (launches.length !== 0) { %>
+        <% launches.forEach( (launch) => { %>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" src="<%= launch.rocket.imageURL %>" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%= launch.name %></h5>
+              <!-- <p class="card-text"><%= launch.missions[0].description %></p> -->
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= launch.windowstart.split(' ').slice(0, 3).join(' ') %></li>
+              <li class="list-group-item"><%= launch.location.name %></li>
+              <li class="list-group-item"><%= launch.lsp.name %></li>
+            </ul>
+            <div class="card-body">
+              <a href="launch/<%= launch.id %>" class="btn btn-primary">More details</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+        <% } else { %>
+          No results found.
+        <% } %>
+    
+      </div>
+    </div>
+  </div>
+
+<% include ./partials/footer %>

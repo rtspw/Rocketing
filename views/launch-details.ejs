@@ -1,0 +1,95 @@
+<% include ./partials/header %>
+
+<body>
+  <% include ./partials/navbar %>
+
+<div class="container mt-2 p-5" >
+  <div class="row">
+    <div class="col-lg mb-3">
+      <div class="card">
+        <img class="card-img-top" src="<%= launches[0].rocket.imageURL  %>" alt="Card image cap">
+      </div>
+    </div>
+    <div class="col-lg mb-3">
+      <div class="card bg-light h-100">
+        <div class="card-body">
+          <h3 class="card-title"><%= launches[0].name %></h3>
+          <p class="card-text"><%= launches[0].missions[0].description%></p>
+          <table class="table">
+          <tbody>
+            <tr>
+              <th scope="row">City</th>
+              <td><%= launches[0].location.name %></td>
+            </tr>
+            <tr>
+              <th scope="row">Pad</th>
+              <td><%= launches[0].location.pads[0].name %></td>
+            </tr>
+            <tr>
+              <th scope="row">Coordinates</th>
+              <td>(<%= launches[0].location.pads[0].latitude %>, <%= launches[0].location.pads[0].longitude %>)</td>
+            </tr>
+            <tr>
+              <th scope="row">Rocket Family</th>
+              <td><%= launches[0].rocket.familyname %></td>
+            </tr>
+            <tr>
+              <th scope="row">Launch Service</th>
+              <td><%= launches[0].lsp.name %></td>
+            </tr>
+          </tbody>
+          </table>
+        </div>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg mb-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h3 class="card-title">Weather</h3>
+          <h1 class="card-text font-weight-light">
+            <span id="temperature">
+              95 °F
+            </span>
+            <span id="weather-description">
+              Sunny
+            </span>
+          </h1>
+        </div>
+      </div>  
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-lg mb-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h3 class="card-title">Pollution</h3>
+          <p class="card-text">
+            <span class="font-weight-bold">Air quality rating: </span>
+            <span id="air-quality">Good</span>
+          </p>
+          <p class="card-text">
+              <span class="font-weight-bold">Major Pollutants: </span>
+              <span id="air-quality">CO2, PM2.5</span>
+          </p>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg mb-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h3 class="card-title">Info</h3>
+          <p class="card-text">Some info on this specific launch. </p>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+ 
+
+
+<% include ./partials/footer %>
