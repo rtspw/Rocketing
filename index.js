@@ -14,7 +14,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/resources'));
 
 app.get('/', (req, res) => {
-  const url = 'https://launchlibrary.net/1.4/launch?enddate=2018-10-21&startdate=2018-9-21&mode=verbose';
+
+  const getDateRange = function() {
+    const date = new Date();
+    let today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    date.setMonth(date.getMonth() - 3);
+    let lastMonth = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    return { today, lastMonth };
+  }
+
+  const dateLimit = getDateRange();
+  const url = `https://launchlibrary.net/1.4/launch?enddate=${dateLimit.today}&startdate=${dateLimit.lastMonth}&mode=verbose&limit=50`;
+  
   fetch(url)
     .then(res => res.json())
     .then((data) => {
@@ -69,6 +80,8 @@ app.get('/launch/:id', (req, res) => {
       try { video = data.launches[0].vidURLs[0] }
       catch (e) { console.error(e.message) };
 
+      if (video === undefined) video = '';
+
       if (video.includes('https://www.youtube.com/watch?v=')) {
         const code = video.substr(32);
         video = `https://www.youtube.com/embed/${code}`;
@@ -107,6 +120,7 @@ app.post('/search', (req, res) => {
     })
     .catch((error) => {
       console.error(error);
+      res.send('There was an error.');
     });
 });
 

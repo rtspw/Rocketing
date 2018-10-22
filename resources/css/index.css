@@ -23,3 +23,37 @@
 .top-picture {
     margin: 0 !important;
 }
+
+.jumbotron-image {
+  background-image: linear-gradient(rgba(163, 22, 156, 0.103), rgba(5, 50, 92, 0.562)), 
+  url('../img/backgrounds/rocket-launch-bg.jpg');
+  background-size: cover;
+  background-position: center 80%;
+  filter: blur(20px) greyscale(50%);
+}
+
+.card {
+  transition: scale 1s;
+  animation: shrink 0.3s linear forwards;
+}
+.card:hover {
+  animation: expand 0.3s linear forwards;
+}
+
+@keyframes expand {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.005);
+  }
+}
+
+@keyframes shrink {
+  from {
+    transform: scale(1.005);
+  }
+  to {
+    transform: scale(1);
+  }
+}
