@@ -6,11 +6,20 @@
           box-sizing: border-box;
 } 
 
-footer {
-    padding: 3rem;
+.btn-primary {
+  background: rgb(23, 138, 146);
+  border-radius: 3px;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: rgb(8, 94, 100);
+}
+
+.pull-right {
+  float: right;
 }
 
 .top-picture {
     margin: 0 !important;
 }
-

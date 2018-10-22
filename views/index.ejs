@@ -20,26 +20,12 @@
 
       <div class="row">
         <% if (launches.length !== 0) { %>
-        <% launches.forEach( (launch) => { %>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" src="<%= launch.rocket.imageURL %>" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title"><%= launch.name %></h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><%= launch.windowstart.split(' ').slice(0, 3).join(' ') %></li>
-              <li class="list-group-item"><%= launch.location.name %></li>
-              <li class="list-group-item"><%= launch.lsp.name %></li>
-            </ul>
-            <div class="card-body">
-              <a href="launch/<%= launch.id %>" class="btn btn-primary">More details</a>
-            </div>
-          </div>
-        </div>
-        <% }) %>
+          <% for(let i = launches.length - 1; i >= 0; --i) { %>
+            <% const launch = launches[i]; %>
+            <% include ./partials/components/card %>
+          <% } %>
         <% } else { %>
-          No results found.
+            <div class="container">No results found.</div>
         <% } %>
     
       </div>

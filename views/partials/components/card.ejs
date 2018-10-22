@@ -1,0 +1,16 @@
+<div class="col-md-4">
+<div class="card mb-4 shadow-sm">
+  <img class="card-img-top" src="<%= launch.imageURL %>" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><%= launch.name %></h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><%= launch.time %></li>
+    <li class="list-group-item"><%= launch.location %></li>
+    <li class="list-group-item"><%= launch.lsp %></li>
+  </ul>
+  <div class="card-body text-right">
+    <a href="launch/<%= launch.id %>" class="btn btn-primary">More details</a>
+  </div>
+</div>
+</div>
