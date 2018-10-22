@@ -5,7 +5,8 @@ const app = express();
 
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
-const port = 5001;
+
+const port = process.env.PORT || 8080;
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
