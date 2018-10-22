@@ -31,13 +31,29 @@ app.get('/', (req, res) => {
     .then((data) => {
       const dataObj = { launches: [] };
       data.launches.forEach((launch, i) => {
+
+        let id = 0;
+        let name = 'Unavaliable';
+        let time = 'Unavaliable';
+        let location = 'Unavaliable';
+        let lsp = 'Unavaliable';
+        let imageURL = '';
+
+        try { id = launch.id; }
+        catch (e) { console.error(e.message) };
+        try { name = launch.name; }
+        catch (e) { console.error(e.message) };
+        try { time = launch.windowstart.split(' ').slice(0, 3).join(' '); }
+        catch (e) { console.error(e.message) };
+        try { location = launch.location.name; }
+        catch (e) { console.error(e.message) };
+        try { lsp = launch.lsp.name; }
+        catch (e) { console.error(e.message) };
+        try { imageURL = launch.rocket.imageURL; }
+        catch (e) { console.error(e.message) };
+
         dataObj.launches[i] = {
-          id: launch.id,
-          name: launch.name,
-          time: launch.windowstart.split(' ').slice(0, 3).join(' '),
-          location: launch.location.name,
-          lsp: launch.lsp.name,
-          imageURL: launch.rocket.imageURL,
+          id, name, time, location, lsp, imageURL
         };
       });
       res.render('index', dataObj);
@@ -101,19 +117,35 @@ app.get('/launch/:id', (req, res) => {
 
 app.post('/search', (req, res) => {
   const query = req.body.query;
-  const url = `https://launchlibrary.net/1.4/launch?name=${query}&mode=verbose`;
+  const url = `https://launchlibrary.net/1.4/launch?name=${query}&mode=verbose&limit=50`;
   fetch(url)
     .then(res => res.json())
     .then((data) => {
       const dataObj = { launches: [] };
       data.launches.forEach((launch, i) => {
+
+        let id = 0;
+        let name = 'Unavaliable';
+        let time = 'Unavaliable';
+        let location = 'Unavaliable';
+        let lsp = 'Unavaliable';
+        let imageURL = '';
+
+        try { id = launch.id }
+        catch(e) { console.error(e) }
+        try { name = launch.name; }
+        catch(e) { console.error(e) }
+        try { time = launch.windowstart.split(' ').slice(0, 3).join(' '); }
+        catch(e) { console.error(e) }
+        try { location = launch.location.name; }
+        catch(e) { console.error(e) }
+        try { lsp = launch.lsp.name; }
+        catch(e) { console.error(e) }
+        try { imageURL = launch.rocket.imageURL; } 
+        catch(e) { console.error(e) }
+
         dataObj.launches[i] = {
-          id: launch.id,
-          name: launch.name,
-          time: launch.windowstart.split(' ').slice(0, 3).join(' '),
-          location: launch.location.name,
-          lsp: launch.lsp.name,
-          imageURL: launch.rocket.imageURL,
+          id, name, time, location, lsp, imageURL
         };
       });
       res.render('index', dataObj);
