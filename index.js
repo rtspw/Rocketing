@@ -148,7 +148,7 @@ app.post('/search', (req, res) => {
           id, name, time, location, lsp, imageURL
         };
       });
-      res.render('index', dataObj);
+      res.render('search-page', dataObj);
     })
     .catch((error) => {
       console.error(error);
