@@ -5,6 +5,7 @@ const app = express();
 
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
+const helmet = require('helmet');
 
 const port = process.env.PORT || 8080;
 
@@ -12,6 +13,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/resources'));
+app.use(helmet());
 
 app.get('/', (req, res) => {
 
@@ -57,6 +59,48 @@ app.get('/', (req, res) => {
         };
       });
       res.render('index', dataObj);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.send('There was an error.');
+    });
+});
+
+app.get('/future', (req, res) => {
+  
+  const url = `https://launchlibrary.net/1.4/launch/next/50&mode=verbose`;
+  
+  fetch(url)
+    .then(res => res.json())
+    .then((data) => {
+      const dataObj = { launches: [] };
+      data.launches.forEach((launch, i) => {
+
+        let id = 0;
+        let name = 'Unavaliable';
+        let time = 'Unavaliable';
+        let location = 'Unavaliable';
+        let lsp = 'Unavaliable';
+        let imageURL = '';
+
+        try { id = launch.id; }
+        catch (e) { console.error(e.message) };
+        try { name = launch.name; }
+        catch (e) { console.error(e.message) };
+        try { time = launch.windowstart.split(' ').slice(0, 3).join(' '); }
+        catch (e) { console.error(e.message) };
+        try { location = launch.location.name; }
+        catch (e) { console.error(e.message) };
+        try { lsp = launch.lsp.name; }
+        catch (e) { console.error(e.message) };
+        try { imageURL = launch.rocket.imageURL; }
+        catch (e) { console.error(e.message) };
+
+        dataObj.launches[i] = {
+          id, name, time, location, lsp, imageURL
+        };
+      });
+      res.render('future-launches', dataObj);
     })
     .catch((error) => {
       console.error(error);
