@@ -22,13 +22,14 @@
     margin: 0 !important;
 }
 
-.brand-font {
+.navbar-brand {
   font-family: 'Gugi', serif;
 }
 
 .jumbotron-image {
   background-image: linear-gradient(rgba(163, 22, 156, 0.103), rgba(5, 50, 92, 0.562)), 
-  url('../img/backgrounds/rocket-launch-bg.jpg');
+  url('../img/backgrounds/rocket-launch-bg.jpg'),
+  linear-gradient(black, black);
   background-size: cover;
   background-position: center 80%;
   filter: blur(20px) greyscale(50%);
@@ -36,7 +37,8 @@
 
 .jumbotron-image-future {
   background-image: linear-gradient(rgba(83, 3, 79, 0.589), rgba(4, 34, 61, 0.603)),
-  url('../img/backgrounds/earth-bg.jpg');
+  url('../img/backgrounds/earth-bg.jpg'),
+  linear-gradient(black, black);
   background-size: cover;
   background-position: center 50%;
   filter: blur(20px) greyscale(50%);
